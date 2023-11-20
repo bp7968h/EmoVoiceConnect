@@ -5,16 +5,28 @@ import ErrorPage from './pages/ErrorPage'
 import LoginForm from './pages/LoginForm'
 import RegisterForm from './pages/RegisterForm'
 import ResetPassForm from './pages/ResetPassForm'
+import ProtectedRoute from './pages/ProtectedRoute'
+import Home from './pages/Home'
+import MatchArea from './components/MatchArea/MatchArea'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import UpdateVoiceMemo from './components/Settings/UpdateVoiceMemo'
+import LogoutConfirm from './components/Settings/LogoutConfirm'
+import EditProfile from './components/Settings/EditProfile'
 
 const theme = createTheme({
   palette: {
     primary: {
       main: '#00C4B0',
+      light: '#FF6F61',
+      contrastText: '#495057',
     },
     secondary: {
       main: '#ADB5BD',
     },
+    error: {
+      main: '#FF6F61'
+    }
+
   },
   typography: {
     fontFamily: '"Montserrat", "Arial", sans-serif',
@@ -50,7 +62,25 @@ const router = createBrowserRouter([
       { path: 'register', element: <RegisterForm /> },
       { path: 'resetpsw', element: <ResetPassForm /> },
     ]
+  },
+  {
+    path: '/home',
+    element: <ProtectedRoute />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '',
+        element: <Home />,
+        children: [
+          { path: '', element: <MatchArea /> },
+          { path: 'editprofile', element: <EditProfile /> },
+          { path: 'updatevoicememo', element: <UpdateVoiceMemo /> },
+          { path: 'logout', element: <LogoutConfirm /> },
+        ]
+      }
+    ]
   }
+
 ])
 
 const App = () => {

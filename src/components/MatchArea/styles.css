@@ -1,0 +1,27 @@
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.SlideInFromTop {
+    animation: slideInFromTop 0.5s ease-in forwards;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.SlideInFromRight {
+    animation: slideInFromRight 0.7s ease-out forwards;
+}
