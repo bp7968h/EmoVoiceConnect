@@ -1,7 +1,9 @@
 import { Box, Typography, Avatar } from '@mui/material'
 import './styles.css'
+import { useNavigate } from 'react-router-dom'
 
 const Matches = () => {
+    const navigate = useNavigate()
     return (
         <Box sx={{
             display: 'flex',
@@ -23,7 +25,7 @@ const Matches = () => {
                 scrollbarWidth: 'none', // For Firefox
                 msOverflowStyle: 'none',  // For Internet Explorer 10+
             }}>
-                <Box sx={{
+                <Box onClick={() => navigate('chat')} sx={{
                     display: 'flex',
                     flexDirection: 'row',
                     gap: '10px',

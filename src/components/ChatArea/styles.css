@@ -1,0 +1,41 @@
+@keyframes fromtop {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes frombottom {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fromright {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.appBar {
+    animation: fromtop 0.4s ease-in forwards;
+}
+
+.chatSection {
+    animation: fromright 0.4s ease-in forwards;
+}
+
+.typingBar {
+    animation: frombottom 0.4s ease-in forwards;
+}

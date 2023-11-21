@@ -12,6 +12,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import UpdateVoiceMemo from './components/Settings/UpdateVoiceMemo'
 import LogoutConfirm from './components/Settings/LogoutConfirm'
 import EditProfile from './components/Settings/EditProfile'
+import Chat from './components/ChatArea/Chat'
 
 const theme = createTheme({
   palette: {
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
           { path: 'editprofile', element: <EditProfile /> },
           { path: 'updatevoicememo', element: <UpdateVoiceMemo /> },
           { path: 'logout', element: <LogoutConfirm /> },
+          { path: 'chat', element: <Chat /> }
         ]
       }
     ]
