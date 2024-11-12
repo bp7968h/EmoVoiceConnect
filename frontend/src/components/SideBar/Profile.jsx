@@ -1,11 +1,12 @@
 import { Box, Avatar, Typography, IconButton } from '@mui/material'
-import ListIcon from '@mui/icons-material/List';
+import SettingsIcon from '@mui/icons-material/Settings';
+import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
 import './styles.css'
 import { CircularProgress } from '@mui/material'
 
 
-const Profile = ({ ToggleSettings }) => {
+const Profile = ({ ToggleSettings, showSettings }) => {
     const { name, picSrc, isLoading } = useSelector(store => store.profile)
     return (
         <Box sx={{
@@ -23,7 +24,9 @@ const Profile = ({ ToggleSettings }) => {
                     />
                     <Typography variant="h5" color="primary.contrastText">{name}</Typography>
                     <IconButton sx={{ ml: 'auto', mr: 3 }} onClick={ToggleSettings}>
-                        <ListIcon />
+                        {
+                            showSettings ? <CloseIcon /> : <SettingsIcon />
+                        }
                     </IconButton>
                 </>}
         </Box>

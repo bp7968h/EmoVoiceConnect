@@ -50,9 +50,41 @@ const ProfileSettings = () => {
             }}
             className="SlideInFromBottom"
         >
-            <Typography variant="h5" color={isEPActive ? '#00C4B0' : ''} onClick={handleEPClick}>Edit Profile</Typography>
-            <Typography variant="h5" color={isVoiceActive ? '#00C4B0' : ''} onClick={handleVoiceClick}>Update Voice Prompts</Typography>
-            <Typography variant="h5" color={isLogOutActive ? '#00C4B0' : ''} onClick={handleLogOut}>Logout</Typography>
+            <Typography 
+                variant="h5" 
+                color={isEPActive ? '#00C4B0' : ''} 
+                onClick={handleEPClick} sx={{
+                    '&:hover': {
+                        cursor: 'pointer',
+                        color: '#00C4B0',
+                    },
+                }}>
+                    Edit Profile
+            </Typography>
+            <Typography 
+                variant="h5" 
+                color={isVoiceActive ? '#00C4B0' : ''} 
+                onClick={handleVoiceClick}
+                sx={{
+                    '&:hover': {
+                        cursor: 'pointer',
+                        color: '#00C4B0',
+                    },
+                }}>
+                    Update Voice Prompts
+            </Typography>
+            <Typography 
+                variant="h5" 
+                color={isLogOutActive ? '#00C4B0' : ''} 
+                onClick={handleLogOut}
+                sx={{
+                    '&:hover': {
+                        cursor: 'pointer',
+                        color: '#00C4B0',
+                    },
+                }}>
+                    Logout
+            </Typography>
         </Stack>
     )
 }

@@ -15,7 +15,7 @@ const ResetPassForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('reset clicked')
+        // console.log('reset clicked')
     }
 
     return (

@@ -18,7 +18,7 @@ chatRouter.get('/:receiverId', async (request, response, next) => {
         return response.status(200).json(chatMessages);
 
     } catch (error) {
-        console.log('Error: ', error)
+        // console.log('Error: ', error)
         next(error)
     }
 })

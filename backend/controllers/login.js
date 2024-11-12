@@ -13,7 +13,7 @@ LoginRouter.post('/', async (request, response, next) => {
         if (!(user && isPasswordCorrect)) {
             return response.status(401).json({ message: 'Invalid Credentials, Please Try Again!' })
         }
-        console.log(user)
+        
         const rawToken = {
             email: user.email,
             id: user.id,

@@ -3,9 +3,6 @@ const config = require('../config')
 
 const detectEmotion = async (audioFilePath, token) => {
     try {
-        console.log("Token: ", token);
-        console.log("Audtio Url: ", audioFilePath);
-
         const audioUrl = `${config.URL}:${config.PORT}/api/${audioFilePath}`;
         const response = await axios.post(config.EMOTION_DETECT, {
             file_url: audioUrl,
@@ -19,7 +16,6 @@ const detectEmotion = async (audioFilePath, token) => {
 
     } catch (error) {
         console.log(error);
-        console.log('Error Detecting Emotion: ', error.message)
         throw error
     }
 }

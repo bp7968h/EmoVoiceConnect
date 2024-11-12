@@ -8,7 +8,7 @@ const authenticateUser = async (credential) => {
         const request = await axios.post(url, credential)
         return request.data
     } catch (error) {
-        console.log("Error thrown");
+        // console.log("Error thrown");
         throw error
     }
 }

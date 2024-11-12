@@ -24,7 +24,7 @@ const Home = () => {
     const userId = useSelector(store => store.profile.id)
     const { connectSocket, disconnectSocket } = useSocket(userId)
     useEffect(() => {
-        console.log('Trigger Socket')
+        // console.log('Trigger Socket')
         connectSocket()
 
         return () => {

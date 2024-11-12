@@ -1,7 +1,7 @@
 import SmallLogo from '../../assets/favicon.png'
 import { Stack, Box, Typography, IconButton, Button } from '@mui/material'
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { editProfileDetails } from '../../reducers/profileSlice'
 import './styles.css'
@@ -27,8 +27,15 @@ const UpdateVoiceMemo = () => {
         newVoice.append('audio', audio)
         dispatch(editProfileDetails(newVoice))
         setAudio(null)
-        console.log('Update Voice Fired')
     }
+
+    useEffect(() => {
+        return () => {
+            if (audioSrc) {
+                URL.revokeObjectURL(audioSrc);
+            }
+        };
+    }, [audioSrc]);
 
     return (
         <Box sx={{

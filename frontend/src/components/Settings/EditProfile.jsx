@@ -2,7 +2,6 @@ import SmallLogo from '../../assets/favicon.png'
 import { Box, Typography, Button, TextField, Avatar } from '@mui/material'
 import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import './styles.css'
 import { editProfileDetails } from '../../reducers/profileSlice'
 
 const EditProfile = () => {
@@ -26,22 +25,22 @@ const EditProfile = () => {
         if (file) {
             setNewPicture(file)
             setTempPic(URL.createObjectURL(file))
-            console.log('File', file)
+            // console.log('File', file)
         }
     }
 
     const handleEditProfile = () => {
         const newDetails = new FormData()
         if (newPicture) {
-            console.log('Set Pic')
+            // console.log('Set Pic')
             newDetails.append('picture', newPicture)
         }
         if (newName !== name) {
-            console.log('Set Name')
+            // console.log('Set Name')
             newDetails.append('newName', newName)
         }
         dispatch(editProfileDetails(newDetails))
-        console.log('Update Fired')
+        // console.log('Update Fired')
     }
 
     return (
@@ -62,7 +61,7 @@ const EditProfile = () => {
                 />
                 <Typography variant="h3">Edit Profile</Typography>
             </Box>
-            <Box className="SlideInFromBottom" sx={{
+            <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

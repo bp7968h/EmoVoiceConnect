@@ -17,7 +17,7 @@ uploadRouter.post('/', upload.fields([{ name: 'picture' }, { name: 'audio' }]), 
 
 // Route to retrieve files securely
 uploadRouter.get('/:type/:filename', (req, res) => {
-    console.log("Python hit this get api");
+    // console.log("Python hit this get api");
     const { type, filename } = req.params;
 
     const filePath = type === 'pictures'

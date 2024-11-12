@@ -21,7 +21,6 @@ const SideBar = () => {
     }
 
     useEffect(() => {
-        console.log('Fetching Profile Details')
         dispatch(getProfileDetails())
     }, [dispatch])
 
@@ -35,7 +34,7 @@ const SideBar = () => {
 
 
         }}>
-            <Profile ToggleSettings={handleSettings} />
+            <Profile ToggleSettings={handleSettings} showSettings={showSettings} />
             {!showSettings ? <Matches /> : <ProfileSettings />}
         </Box >
     )

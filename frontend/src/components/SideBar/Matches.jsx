@@ -9,12 +9,6 @@ const Matches = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const matches = useSelector(store => store.match.matches)
-    console.log('Matches Fetched: ', matches)
-    // console.log('Fetched Matched: ', test)
-    // const matches = [
-    //     { id: 1, name: 'Bhuwan Pandit', imgSrc: 'http://localhost:3001/uploads/pictures/picture-1701013147720.jpg' },
-    //     { id: 2, name: 'Anu Shrestha', imgSrc: 'http://localhost:3001/uploads/pictures/picture-1700927582863.jpeg' },
-    // ]
 
     useEffect(() => {
         dispatch(getMatchedUsers())

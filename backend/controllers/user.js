@@ -46,23 +46,21 @@ UserRouter.post('/', upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'a
 
     } catch (error) {
 
-        console.log("We got to the catch block");
-
         if (picturePath && !fs.existsSync(picturePath)) {
             try {
                 fs.unlinkSync(picturePath);
-                console.log('Cleaned up picture file:', picturePath);
+                // console.log('Cleaned up picture file:', picturePath);
             } catch (err) {
-                console.error('Failed to delete picture file:', err);
+                // console.error('Failed to delete picture file:', err);
             }
         }
 
         if (audioPath && !fs.existsSync(audioPath)) {
             try {
                 fs.unlinkSync(audioPath);
-                console.log('Cleaned up audio file:', audioPath);
+                // console.log('Cleaned up audio file:', audioPath);
             } catch (err) {
-                console.error('Failed to delete audio file:', err);
+                // console.error('Failed to delete audio file:', err);
             }
         }
         next(error)
@@ -84,28 +82,25 @@ UserRouter.get('/', tokenExtractor, userExtractor, async (request, response, nex
 
 UserRouter.put('/profile', tokenExtractor, userExtractor, upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'audio', maxCount: 1 }]), async (request, response, next) => {
     try {
-        console.log('Is it Here')
-        console.log('Body: ', request.body)
-        console.log('File: ', request.files)
         const { newName } = request.body
         const newPic = request.files.picture ? request.files.picture[0].path : null
         const newAudio = request.files.audio ? request.files.audio[0].path : null;
         if (newName && newPic) {
             const updatedUser = await User.findByIdAndUpdate(request.user.id, { name: newName, picture: newPic }, { new: true }).lean()
-            console.log('User Both Updated: ', updatedUser)
+        
             return response.status(201).json({ name: newName, picture: newPic, message: 'User Name and PIcture Updated Successfully' })
         } else if (newName && !newPic) {
             const updatedUser = await User.findByIdAndUpdate(request.user.id, { name: newName }, { new: true }).lean()
-            console.log('User Name Updated: ', updatedUser)
+            
             return response.status(201).json({ name: newName, message: 'User Name Updated Successfully' })
         } else if (!newName && newPic) {
             const updatedUser = await User.findByIdAndUpdate(request.user.id, { picture: newPic }, { new: true }).lean()
-            console.log('User Picture Updated: ', updatedUser)
+            
             return response.status(201).json({ picture: newPic, message: 'User Profile PIcture Updated Successfully' })
         } else if (newAudio) {
-            const emotion = await detectEmotion(newAudio)
+            const emotion = await detectEmotion(newAudio, request.token)
             const updatedUser = await User.findByIdAndUpdate(request.user.id, { audio: newAudio, emotion: emotion }, { new: true }).lean()
-            console.log('Voice Memo Updated: ', updatedUser)
+            
             return response.status(201).json({ audio: newAudio, emotion: emotion, message: 'Voice Memo Updated Successfully' })
         } else {
             return response.status(400).json({ message: 'Cannot Update Profile without any Changes' })

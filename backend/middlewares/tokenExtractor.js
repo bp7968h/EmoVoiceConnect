@@ -4,7 +4,6 @@ const tokenExtractor = (request, response, next) => {
         return response.status(401).json({ message: 'Cannot Process WithOut Token, Please Login!' })
     }
     request.token = authorization.replace('Bearer ', '')
-    console.log('Token Extracted: ', request.token)
     next()
 }
 
