@@ -11,17 +11,17 @@ EmoVoiceConnect is an innovative web-based matchmaking platform that goes beyond
 - [Contributions](#contributions)
 - [License](#license)
 
-## Introduction {#introduction}
+## Introduction
 In a world where social interactions are increasingly moving online, EmoVoiceConnect aims to make connections more authentic by prioritizing emotional compatibility. Using machine learning algorithms, the platform analyzes users' voice recordings to detect emotional states (happiness, sadness, calmness, or anger) and matches users based on complementary emotions.
 
-## Features {#features}
+## Features
 - **Emotion-based Matchmaking**: Match users based on emotional compatibility derived from voice recordings.
 - **Real-time Chat**: Engage with matched users through an integrated chat system.
 - **Profile Management**: Create and customize profiles with voice samples.
 - **Secure User Authentication**: Secure login and registration with JWT-based authentication.
 - **Data Privacy**: All voice recordings and pictures are securely stored and processed with user consent.
 
-## Technologies Used {#technologies-used}
+## Technologies Used
 ### Frontend
 - **React**: For building dynamic user interfaces.
 - **Material-UI**: For a UI components.
@@ -36,7 +36,7 @@ In a world where social interactions are increasingly moving online, EmoVoiceCon
 - **Librosa**: For audio processing and feature extraction.
 - **TensorFlow**: For training deep learning models on emotion detection.
 
-## Installation {#installation}
+## Installation
 To get started with EmoVoiceConnect locally, follow these steps:
 
 ### Prerequisites
@@ -97,17 +97,17 @@ pip install -r requirements.txt
 python main.py
 ```
 
-## Usage {#usage}
+## Usage
 
 - Register a new account.
 - Complete your profile and upload a voice sample.
 - Browse through matches based on emotional compatibility.
 - Engage in conversations with your matches through the chat feature.
 
-## Contributions {#contributions}
+## Contributions
 
 Contributions are welcome! Please fork this repository and submit a pull request with your changes.
 
-## License {#license}
+## License
 
 Please view the [License File](LICENSE)
