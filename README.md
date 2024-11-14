@@ -58,7 +58,7 @@ cd backend
 npm install
 
 # Set up environment variables
-cp .env.example .env
+cp .env.sample .env
 # Update .env with your MongoDB URI and other secrets
 
 # Run the backend server
@@ -74,7 +74,7 @@ cd ../frontend
 npm install
 
 # Set up environment variables
-cp .env.example .env
+cp .env.sample .env
 # Update .env with your your backend URL
 
 # Run the React app
