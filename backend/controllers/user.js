@@ -8,6 +8,7 @@ const upload = require('../utils/storage')
 const detectEmotion = require('../utils/emotion')
 const tokenExtractor = require('../middlewares/tokenExtractor')
 const userExtractor = require('../middlewares/userExtractor')
+const { deleteFile } = require('../utils/fileCleanup');
 
 UserRouter.post('/', upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'audio', maxCount: 1 }]), async (request, response, next) => {
     let picturePath = null;
@@ -83,28 +84,37 @@ UserRouter.get('/', tokenExtractor, userExtractor, async (request, response, nex
 UserRouter.put('/profile', tokenExtractor, userExtractor, upload.fields([{ name: 'picture', maxCount: 1 }, { name: 'audio', maxCount: 1 }]), async (request, response, next) => {
     try {
         const { newName } = request.body
-        const newPic = request.files.picture ? request.files.picture[0].path : null
-        const newAudio = request.files.audio ? request.files.audio[0].path : null;
-        if (newName && newPic) {
-            const updatedUser = await User.findByIdAndUpdate(request.user.id, { name: newName, picture: newPic }, { new: true }).lean()
-        
-            return response.status(201).json({ name: newName, picture: newPic, message: 'User Name and PIcture Updated Successfully' })
-        } else if (newName && !newPic) {
-            const updatedUser = await User.findByIdAndUpdate(request.user.id, { name: newName }, { new: true }).lean()
-            
-            return response.status(201).json({ name: newName, message: 'User Name Updated Successfully' })
-        } else if (!newName && newPic) {
-            const updatedUser = await User.findByIdAndUpdate(request.user.id, { picture: newPic }, { new: true }).lean()
-            
-            return response.status(201).json({ picture: newPic, message: 'User Profile PIcture Updated Successfully' })
-        } else if (newAudio) {
-            const emotion = await detectEmotion(newAudio, request.token)
-            const updatedUser = await User.findByIdAndUpdate(request.user.id, { audio: newAudio, emotion: emotion }, { new: true }).lean()
-            
-            return response.status(201).json({ audio: newAudio, emotion: emotion, message: 'Voice Memo Updated Successfully' })
-        } else {
-            return response.status(400).json({ message: 'Cannot Update Profile without any Changes' })
+        const newPic = request.files.picture?.[0]?.path || null;
+        const newAudio = request.files.audio?.[0]?.path || null;
+
+        const currentUser = await User.findById(request.user.id).lean();
+        const oldPic = currentUser?.picture;
+        const oldAudio = currentUser?.audio;
+
+        const updateFields = {};
+
+        if (newName) updateFields.name = newName;
+        if (newPic) updateFields.picture = newPic;
+        if (newAudio) {
+          const emotion = await detectEmotion(newAudio, request.token);
+          updateFields.audio = newAudio;
+          updateFields.emotion = emotion;
         }
+
+        if (Object.keys(updateFields).length === 0) {
+          return response.status(400).json({ message: 'Cannot Update Profile without any Changes' });
+        }
+
+        await User.findByIdAndUpdate(request.user.id, updateFields, { new: true }).lean();
+
+        if (newPic && oldPic) await deleteFile(oldPic);
+        if (newAudio && oldAudio) await deleteFile(oldAudio);
+
+        return response.status(201).json({
+          ...updateFields,
+          message: 'Profile Updated Successfully',
+        });
+
     } catch (error) {
         console.log('Error Triggered: ', error)
         next(error)
